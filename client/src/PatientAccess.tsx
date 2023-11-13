@@ -16,25 +16,27 @@ function PatientAccess() {
   console.log(serverUrl);
   console.log(apiKey);
   let response = null;
-  FlexpaLink.create({
-    // Replace with your publishable key
-    publishableKey: apiKey,
-    onSuccess: async publicToken => {
-      // Send `publicToken` to your backend to exchange it for a patient `access_token`
-      // https://www.flexpa.com/docs/sdk/login#exchange
-      try {
-        response = await fetch(`${serverUrl}/api/token`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ publicToken }),
-        });
-      } catch (err) {
-        console.log(err);
-      }
-    },
-  });
+  console.log('FETCHING'),
+    FlexpaLink.create({
+      // Replace with your publishable key
+      publishableKey: apiKey,
+      onSuccess: async publicToken => {
+        // Send `publicToken` to your backend to exchange it for a patient `access_token`
+        // https://www.flexpa.com/docs/sdk/login#exchange
+        console.log('publicToken: ', publicToken);
+        try {
+          response = await fetch(`${serverUrl}/api/token`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ publicToken }),
+          });
+        } catch (err) {
+          console.log(err);
+        }
+      },
+    });
 
   return (
     <button onClick={() => FlexpaLink.open()}>Connect your health data</button>
