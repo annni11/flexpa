@@ -1,13 +1,13 @@
 import express, { Request, Response, Router } from 'express';
-
+import tokenController from '../controllers/tokenController';
 const router: Router = express.Router();
 
-router.get('/', (req: Request, res: Response) => {
-  res.send('Hello World, TESTING!');
-});
-
-router.post('/test', (req: Request, res: Response) => {
-  res.send('Hello There!');
-});
+router.post(
+  '/token',
+  tokenController.exchangeToken,
+  (req: Request, res: Response) => {
+    res.send('Token Received!');
+  },
+);
 
 export default router;

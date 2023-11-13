@@ -1,14 +1,13 @@
 import React from 'react';
-import './style.scss';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Home from './Home';
+import './App.css';
+import PatientAccess from './PatientAccess';
+
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path='/' element={<Home />} />
-      </Routes>
-    </BrowserRouter>
+    <div>
+      <h1>Hello</h1>
+      <PatientAccess />
+    </div>
   );
 }
 
