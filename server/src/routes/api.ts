@@ -1,12 +1,15 @@
-import express, { Request, Response, Router } from 'express';
+import express, { type Request, type Response, type Router } from 'express';
 import tokenController from '../controllers/tokenController';
+import fhirController from '../controllers/fhirController';
 const router: Router = express.Router();
 
 router.post(
-  '/token',
+  '/profile',
   tokenController.exchangeToken,
+  tokenController.intropectDecode,
+  fhirController.getPatientProfile,
   (req: Request, res: Response) => {
-    res.send('Token Received!');
+    res.status(200).json(res.locals.patientProfile);
   },
 );
 

@@ -1,5 +1,3 @@
-import React from 'react';
-
 interface FlexpaConfig {
   publishableKey: string;
   onSuccess: (publicToken: string) => Promise | unknown;
@@ -25,13 +23,15 @@ function PatientAccess() {
         // https://www.flexpa.com/docs/sdk/login#exchange
         console.log('publicToken: ', publicToken);
         try {
-          response = await fetch(`${serverUrl}/api/token`, {
+          response = await fetch(`${serverUrl}/api/profile`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
             },
             body: JSON.stringify({ publicToken }),
           });
+          const data = await response.json();
+          console.log(data);
         } catch (err) {
           console.log(err);
         }
