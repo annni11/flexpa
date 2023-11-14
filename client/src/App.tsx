@@ -1,12 +1,10 @@
 import './App.css';
-import Profile from './containers/PatientAccess';
-import { Routes, Route } from 'react-router-dom';
-import Home from './containers/Home';
+import PatientAccess from './containers/PatientAccess';
+
 function App() {
   return (
-    <div>
-      <h1>Hello</h1>
-      <Profile />
+    <div className='flex flex-col'>
+      <PatientAccess />
     </div>
   );
 }

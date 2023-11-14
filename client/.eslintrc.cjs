@@ -23,5 +23,7 @@ module.exports = {
       'warn',
       { allowConstantExport: true },
     ],
+    '@typescript-eslint/no-unsafe-call': 'off', // Disable unsafe call checks for FLEXPALINK
+    '@typescript-eslint/no-unsafe-member-access': 'off', // Disable unsafe member access checks FLEXPALINK
   },
 };

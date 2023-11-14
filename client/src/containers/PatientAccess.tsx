@@ -41,7 +41,7 @@ function PatientAccess() {
             console.log(data);
             setResponse(data);
             console.log('RESPONSE status:', res.status); //status is 200
-            navigate('/home');
+            navigate('/home', { state: { data } });
           } catch (err) {
             console.log(err);
           }
