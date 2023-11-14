@@ -1,5 +1,5 @@
 import './App.css';
-import Profile from './containers/Profile';
+import Profile from './containers/PatientAccess';
 import { Routes, Route } from 'react-router-dom';
 import Home from './containers/Home';
 function App() {
@@ -7,9 +7,6 @@ function App() {
     <div>
       <h1>Hello</h1>
       <Profile />
-      <Routes>
-        <Route path='/home' element={<Home />}></Route>
-      </Routes>
     </div>
   );
 }
