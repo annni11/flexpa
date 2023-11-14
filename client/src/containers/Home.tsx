@@ -6,7 +6,7 @@ function Home() {
   const state = location.state as Record<string, unknown>;
   console.log('state from HOME:', state);
   return (
-    <div className='Home'>
+    <div className='pt-20'>
       <Profile {...state} />
     </div>
   );
