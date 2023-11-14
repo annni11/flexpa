@@ -9,6 +9,23 @@ interface FhirController {
   ) => Promise<void>;
 }
 
+interface PatientProfile {
+  name: string;
+  gender: string;
+  birthDate: string;
+  contact: {
+    phone: string;
+    email: string;
+  };
+  address: {
+    line: string[];
+    city: string;
+    state: string;
+    postalCode: string;
+  };
+  accessToken: string;
+}
+
 const fhirController: FhirController = {
   getPatientProfile: async (req, res, next) => {
     const accessToken = res.locals.accessToken;
@@ -29,12 +46,21 @@ const fhirController: FhirController = {
       const response = await request.json();
       console.log('FHIR RESPONSE!', response);
 
-      const patientProfile = {
+      const patientProfile: PatientProfile = {
         name: response.name[0].text,
         gender: response.gender,
         birthDate: response.birthDate,
-        contact: response.telecom[0],
-        address: response.address[0],
+        contact: {
+          phone: response.telecom[0].value,
+          email: response.telecom[1].value,
+        },
+        address: {
+          line: response.address[0].line,
+          city: response.address[0].city,
+          state: response.address[0].state,
+          postalCode: response.address[0].postalCode,
+        },
+        accessToken,
       };
 
       res.locals.patientProfile = patientProfile;
