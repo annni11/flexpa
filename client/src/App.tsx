@@ -7,15 +7,17 @@ import PatientAccess from './containers/PatientAccess';
 import Profile from './containers/Profile';
 import EOB from './containers/EOB';
 import { ProfileProps } from './types';
+import Footer from './components/Footer';
 
 function App() {
   const [profile, setProfile] = useState({} as ProfileProps);
   const [eob, setEOB] = useState([]) as any;
 
   return (
-    <div className='flex flex-col'>
+    <div className='flex flex-col '>
       <NavBar />
 
+      <Footer />
       <Routes>
         <Route
           path='/'

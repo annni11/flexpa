@@ -11,7 +11,7 @@ function Profile(props) {
   console.log('THIS IS PROFILE~~~', profile);
 
   return (
-    <div className='flex flex-col gap-5'>
+    <div className='flex flex-col gap-5 py-28'>
       <Card>
         <CardHeader>
           <CardTitle>Hello, {name}</CardTitle>

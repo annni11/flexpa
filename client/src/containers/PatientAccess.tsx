@@ -48,7 +48,8 @@ function PatientAccess(props) {
       });
     }, []);
   return (
-    <div className='pt-40'>
+    <div className='flex flex-col pt-40 gap-10'>
+      <h1>Welcome, get started here:</h1>
       <ButtonComponent />
     </div>
   );

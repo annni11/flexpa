@@ -46,7 +46,12 @@ function EOB(props) {
     );
   });
 
-  return <div className='pt-28'>{eobRender}</div>;
+  return (
+    <div className='py-28'>
+      <h1>Choose a provider:</h1>
+      {eobRender}
+    </div>
+  );
 }
 
 export default EOB;

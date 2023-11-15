@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import {
@@ -12,8 +13,13 @@ import { Button } from '@/components/ui/button';
 import { LogOut, User, FileText, MenuIcon } from 'lucide-react';
 
 function NavBar() {
+  const [menuClicked, setMenuClicked] = useState(false);
   return (
-    <nav className='flex flex-row justify-between fixed top-0 left-0 w-screen p-12'>
+    <nav
+      className='flex flex-row justify-between fixed top-0 left-0 w-screen py-4 px-10'
+      style={{
+        backgroundImage: 'url(https://os.flexpa.com/assets/Brand-pattern.png)',
+      }}>
       <div>
         <img
           src='https://os.flexpa.com/assets/Brand-logo-full.png'
