@@ -8,7 +8,7 @@ function Profile(props) {
   const { profile } = props;
   // const [profileState, setProfileState] = useState([]);
   // const profile = useLocation();
-  console.log('THIS IS PROFILE', profile);
+  console.log('THIS IS PROFILE~~~', profile);
 
   //setProfileState(profile.state.data);
 

@@ -6,10 +6,15 @@ const router: Router = express.Router();
 router.post(
   '/profile',
   tokenController.exchangeToken,
-  tokenController.intropectDecode,
+  // tokenController.intropectDecode,
   fhirController.getPatientProfile,
+  fhirController.getPatientEOB,
   (req: Request, res: Response) => {
-    res.status(200).json(res.locals.patientProfile);
+    const patientAll = {
+      profile: res.locals.patientProfile,
+      eob: res.locals.patientEOB,
+    };
+    res.status(200).json(patientAll);
   },
 );
 

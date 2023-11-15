@@ -7,6 +7,11 @@ interface FhirController {
     res: Response,
     next: NextFunction,
   ) => Promise<void>;
+  getPatientEOB: (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ) => Promise<void>;
 }
 
 interface PatientProfile {
@@ -29,8 +34,6 @@ interface PatientProfile {
 const fhirController: FhirController = {
   getPatientProfile: async (req, res, next) => {
     const accessToken = res.locals.accessToken;
-    const patientID = res.locals.patientId;
-
     try {
       const request = await fetch(
         'https://api.flexpa.com/fhir/Patient/$PATIENT_ID',
@@ -44,7 +47,7 @@ const fhirController: FhirController = {
       );
 
       const response = await request.json();
-      console.log('FHIR RESPONSE!', response);
+      // console.log('FHIR RESPONSE!', response);
 
       const patientProfile: PatientProfile = {
         name: response.name[0].text,
@@ -64,6 +67,44 @@ const fhirController: FhirController = {
       };
 
       res.locals.patientProfile = patientProfile;
+    } catch (err) {
+      console.log(err);
+    }
+    next();
+  },
+  getPatientEOB: async (req, res, next) => {
+    const accessToken = res.locals.accessToken;
+    try {
+      const request = await fetch(
+        'https://api.flexpa.com/fhir/ExplanationOfBenefit?patient=$PATIENT_ID',
+        {
+          headers: {
+            'content-type': 'application/json',
+            authorization: `Bearer ${accessToken}`,
+            'x-flexpa-raw': '1',
+          },
+        },
+      );
+
+      const response = await request.json();
+      // console.log('EOB RESPONSE!', response);
+
+      // const patientEOB = response.entry.map(entry => {
+      //   insurer: entry.resource.insurer.display;
+      //   provider: entry.resource.provider.display;
+      //   prescription: entry.resource.prescription.display;
+      //   facility: entry.resource.facility.display;
+      //   outcome: entry.resource.outcome;
+      //   paymentDate: entry.resource.payment.date;
+      //   paymentAmount: entry.resource.payment.amount.value;
+      // });
+
+      const patientEOB = {
+        provider: response.entry[0].resource.provider.display,
+        prescription: response.entry[0].resource.prescription.display,
+      };
+      // console.log(patientEOB);
+      res.locals.patientEOB = patientEOB;
     } catch (err) {
       console.log(err);
     }

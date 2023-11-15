@@ -13,7 +13,7 @@ declare const FlexpaLink: {
 };
 
 function PatientAccess(props) {
-  const { profile, setProfile, setEOB } = props;
+  const { profile, setProfile, eob, setEOB } = props;
 
   const navigate = useNavigate();
   const apiKey = import.meta.env.VITE_REACT_FLEXPA_PUBLISHABLE_KEY;
@@ -37,9 +37,12 @@ function PatientAccess(props) {
               body: JSON.stringify({ publicToken }),
             });
             const data = await res.json();
-            console.log('this is data', data);
-            setProfile(data);
-            console.log(profile);
+
+            setProfile(data.profile);
+            setEOB(data.eob);
+
+            console.log('THIS IS profile', profile);
+            console.log('THIS IS eob', eob);
             navigate('/profile');
           } catch (err) {
             console.log(err);

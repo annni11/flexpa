@@ -62,7 +62,6 @@ const tokenController: TokenController = {
       const { jti, iat, sub, exp, state, endpoint } = await request.json();
 
       console.log('THE INTROSPECT!', jti, iat, sub, exp, state, endpoint);
-      res.locals.patientID = endpoint.id;
     } catch (err) {
       console.log(err);
     }

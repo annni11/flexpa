@@ -28,7 +28,7 @@ function App() {
           }
         />
         <Route path='/profile' element={<Profile profile={profile} />} />
-        <Route path='/eob' element={<EOB />} />
+        <Route path='/eob' element={<EOB eob={eob} />} />
       </Routes>
     </div>
   );
