@@ -9,7 +9,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Button } from '@/components/ui/button';
-import { LogOut, User, FileText } from 'lucide-react';
+import { LogOut, User, FileText, MenuIcon } from 'lucide-react';
 
 function NavBar() {
   return (
@@ -26,7 +26,7 @@ function NavBar() {
       <div>
         <DropdownMenu>
           <DropdownMenuTrigger>
-            <Button variant='secondary'>Menu</Button>
+            <MenuIcon />
           </DropdownMenuTrigger>
           <DropdownMenuContent className='mr-2'>
             <DropdownMenuLabel>My Account</DropdownMenuLabel>

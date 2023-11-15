@@ -11,12 +11,16 @@ function ButtonComponent() {
   return (
     <div>
       {!buttonClicked ? (
-        <Button onClick={onClick}>Connect your health data</Button>
+        <div>
+          <Button onClick={onClick}>Connect your health data</Button>
+        </div>
       ) : (
-        <Button disabled>
-          <Loader2 className='mr-2 h-4 w-8 animate-spin' />
-          Please wait
-        </Button>
+        <div>
+          <Button disabled>
+            <Loader2 className='mr-2 h-4 w-8 animate-spin' />
+            Please wait
+          </Button>
+        </div>
       )}
     </div>
   );

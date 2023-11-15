@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import ButtonComponent from '../components/Button';
+import ButtonComponent from '../components/ButtonComponent';
 import { useState, useEffect } from 'react';
 
 interface FlexpaConfig {
@@ -40,9 +40,6 @@ function PatientAccess(props) {
 
             setProfile(data.profile);
             setEOB(data.eob);
-
-            console.log('THIS IS profile', profile);
-            console.log('THIS IS eob', eob);
             navigate('/profile');
           } catch (err) {
             console.log(err);

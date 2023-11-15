@@ -63,7 +63,6 @@ const fhirController: FhirController = {
           state: response.address[0].state,
           postalCode: response.address[0].postalCode,
         },
-        accessToken,
       };
 
       res.locals.patientProfile = patientProfile;
@@ -87,23 +86,20 @@ const fhirController: FhirController = {
       );
 
       const response = await request.json();
-      // console.log('EOB RESPONSE!', response);
 
-      // const patientEOB = response.entry.map(entry => {
-      //   insurer: entry.resource.insurer.display;
-      //   provider: entry.resource.provider.display;
-      //   prescription: entry.resource.prescription.display;
-      //   facility: entry.resource.facility.display;
-      //   outcome: entry.resource.outcome;
-      //   paymentDate: entry.resource.payment.date;
-      //   paymentAmount: entry.resource.payment.amount.value;
-      // });
+      const patientEOB = response.entry.map(entry => {
+        const obj = {
+          insurer: entry.resource.insurer.display || 'N/A',
+          provider: entry.resource.provider.display || 'N/A',
+          prescription: entry.resource.prescription || 'N/A',
+          facility: entry.resource.facility || 'N/A',
+          outcome: entry.resource.outcome || 'N/A',
+          createdDate: entry.resource.created || 'N/A',
+        };
+        return obj;
+      });
 
-      const patientEOB = {
-        provider: response.entry[0].resource.provider.display,
-        prescription: response.entry[0].resource.prescription.display,
-      };
-      // console.log(patientEOB);
+      console.log('SERVER EOB!', patientEOB);
       res.locals.patientEOB = patientEOB;
     } catch (err) {
       console.log(err);

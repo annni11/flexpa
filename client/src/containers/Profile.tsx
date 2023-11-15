@@ -6,23 +6,13 @@ import { useLocation } from 'react-router-dom';
 
 function Profile(props) {
   const { profile } = props;
-  // const [profileState, setProfileState] = useState([]);
-  // const profile = useLocation();
+
+  const { name, gender, contact, birthDate, address } = profile;
   console.log('THIS IS PROFILE~~~', profile);
-
-  //setProfileState(profile.state.data);
-
-  // console.log('this is profile state~~', profileState);
-  // useEffect(() => {
-  //   setProfileState(profile.state);
-  // }, []);
-
-  //console.log('THIS IS PROFILE STATE', profileState);
 
   return (
     <div className='flex flex-col gap-5'>
-      <h1>hello</h1>
-      {/* <Card>
+      <Card>
         <CardHeader>
           <CardTitle>Hello, {name}</CardTitle>
         </CardHeader>
@@ -65,7 +55,7 @@ function Profile(props) {
             <li>{address.postalCode}</li>
           </ul>
         </CardContent>
-      </Card> */}
+      </Card>
     </div>
   );
 }
