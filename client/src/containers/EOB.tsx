@@ -1,7 +1,7 @@
 function EOB() {
   return (
     <div>
-      <p>testing</p>
+      <p>testing, EOB</p>
     </div>
   );
 }

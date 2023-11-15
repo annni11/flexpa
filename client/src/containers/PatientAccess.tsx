@@ -12,13 +12,12 @@ declare const FlexpaLink: {
   open: () => Record<string, unknown>;
 };
 
-function PatientAccess() {
+function PatientAccess(props) {
+  const { profile, setProfile, setEOB } = props;
+
   const navigate = useNavigate();
   const apiKey = import.meta.env.VITE_REACT_FLEXPA_PUBLISHABLE_KEY;
   const serverUrl = import.meta.env.VITE_REACT_SERVER_URL;
-  const [response, setResponse] = useState(null);
-  console.log(serverUrl);
-  console.log(apiKey);
 
   console.log('FETCHING'),
     useEffect(() => {
@@ -38,17 +37,21 @@ function PatientAccess() {
               body: JSON.stringify({ publicToken }),
             });
             const data = await res.json();
-            console.log(data);
-            setResponse(data);
-            console.log('RESPONSE status:', res.status); //status is 200
-            navigate('/home', { state: { data } });
+            console.log('this is data', data);
+            setProfile(data);
+            console.log(profile);
+            navigate('/profile');
           } catch (err) {
             console.log(err);
           }
         },
       });
     }, []);
-  return <ButtonComponent />;
+  return (
+    <div className='pt-40'>
+      <ButtonComponent />
+    </div>
+  );
 }
 
 export default PatientAccess;
