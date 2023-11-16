@@ -13,12 +13,11 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { create } from 'domain';
 
 function EOB(props) {
   const { eob } = props;
 
-  const eobRender = eob.map((entry, i) => {
+  const eobRender = eob.map((entry, i: number) => {
     const { insurer, provider, prescription, facility, createdDate, outcome } =
       entry;
     return (

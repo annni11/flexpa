@@ -6,12 +6,13 @@ import NavBar from './components/NavBar';
 import PatientAccess from './containers/PatientAccess';
 import Profile from './containers/Profile';
 import EOB from './containers/EOB';
-import { ProfileProps } from './types';
 import Footer from './components/Footer';
 
+import { Patient, ExplanationOfBenefit } from 'fhir/r4';
+
 function App() {
-  const [profile, setProfile] = useState({} as ProfileProps);
-  const [eob, setEOB] = useState([]) as any;
+  const [profile, setProfile] = useState({} as Patient);
+  const [eob, setEOB] = useState([]);
 
   return (
     <div className='flex flex-col '>

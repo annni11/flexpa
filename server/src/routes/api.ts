@@ -6,7 +6,6 @@ const router: Router = express.Router();
 router.post(
   '/profile',
   tokenController.exchangeToken,
-  // tokenController.intropectDecode,
   fhirController.getPatientProfile,
   fhirController.getPatientEOB,
   (req: Request, res: Response) => {

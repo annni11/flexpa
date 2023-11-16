@@ -1,32 +1,19 @@
 import { type Request, type Response, type NextFunction } from 'express';
+import {
+  TokenController,
+  LinkExchangeResponse,
+  FlexpaAccessToken,
+} from '../types';
 import 'dotenv/config';
 
-interface TokenController {
-  exchangeToken: (
-    req: Request,
-    res: Response,
-    next: NextFunction,
-  ) => Promise<void>;
-  intropectDecode: (
-    req: Request,
-    res: Response,
-    next: NextFunction,
-  ) => Promise<void>;
-  tokenRefresh: (
-    req: Request,
-    res: Response,
-    next: NextFunction,
-  ) => Promise<void>;
-}
-
 const tokenController: TokenController = {
-  exchangeToken: async (req, res, next) => {
+  exchangeToken: async (req: Request, res: Response, next: NextFunction) => {
     // get the token from the request body
-    const publicToken = req.body.publicToken;
-    console.log('PUBLIC TOKEN!', publicToken);
+    const publicToken: FlexpaAccessToken = req.body.publicToken;
+
     // get the secret key from the .env file
     const secretKey = process.env.FLEXPA_API_SECRET_KEY;
-    console.log('SECRET KEY!', secretKey);
+
     try {
       const data = await fetch('https://api.flexpa.com/link/exchange', {
         method: 'POST',
@@ -39,35 +26,21 @@ const tokenController: TokenController = {
         }),
       });
 
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { access_token: accessToken, expires_in: expiresIn } =
-        await data.json();
+        (await data.json()) as LinkExchangeResponse;
 
-      console.log('THE COMBO!', accessToken, expiresIn);
       res.locals.accessToken = accessToken;
     } catch (err) {
-      console.log(err);
-    }
-    next();
-  },
-  intropectDecode: async (req, res, next) => {
-    const ACCESS_TOKEN = res.locals.accessToken;
-    try {
-      const request = await fetch('https://api.flexpa.com/link/introspect', {
-        headers: {
-          'content-type': 'application/json',
-          authorization: `Bearer ${ACCESS_TOKEN}`,
-        },
+      return next({
+        log: 'Express error handler caught in ExchangeToken: ' + err,
+        status: 400,
+        message: { err: 'An error occurred' },
       });
-
-      const { jti, iat, sub, exp, state, endpoint } = await request.json();
-
-      console.log('THE INTROSPECT!', jti, iat, sub, exp, state, endpoint);
-    } catch (err) {
-      console.log(err);
     }
-    next();
+    return next();
   },
-  tokenRefresh: async (req, res, next) => {
+  tokenRefresh: async (req: Request, res: Response, next: NextFunction) => {
     const accessToken = res.locals.accessToken;
     const secretKey = process.env.FLEXPA_API_SECRET_KEY;
     try {
@@ -82,14 +55,18 @@ const tokenController: TokenController = {
         }),
       });
 
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { access_token: newAccessToken, expires_in: expiresIn } =
-        await request.json();
-      console.log('THE REFRESH!', newAccessToken, expiresIn);
+        (await request.json()) as LinkExchangeResponse;
       res.locals.accessToken = newAccessToken;
     } catch (err) {
-      console.log(err);
+      return next({
+        log: 'Express error handler caught in tokenRefresh: ' + err,
+        status: 400,
+        message: { err: 'An error occurred' },
+      });
     }
-    next();
+    return next();
   },
 };
 

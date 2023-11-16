@@ -1,39 +1,19 @@
 import { type Request, type Response, type NextFunction } from 'express';
+import {
+  FhirController,
+  PatientProfile,
+  PatientEOBEntry,
+  FlexpaAccessToken,
+} from '../types';
 import 'dotenv/config';
 
-interface FhirController {
-  getPatientProfile: (
-    req: Request,
-    res: Response,
-    next: NextFunction,
-  ) => Promise<void>;
-  getPatientEOB: (
-    req: Request,
-    res: Response,
-    next: NextFunction,
-  ) => Promise<void>;
-}
-
-interface PatientProfile {
-  name: string;
-  gender: string;
-  birthDate: string;
-  contact: {
-    phone: string;
-    email: string;
-  };
-  address: {
-    line: string[];
-    city: string;
-    state: string;
-    postalCode: string;
-  };
-  accessToken: string;
-}
-
 const fhirController: FhirController = {
-  getPatientProfile: async (req, res, next) => {
-    const accessToken = res.locals.accessToken;
+  getPatientProfile: async (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ) => {
+    const accessToken: FlexpaAccessToken = res.locals.accessToken;
     try {
       const request = await fetch(
         'https://api.flexpa.com/fhir/Patient/$PATIENT_ID',
@@ -47,7 +27,6 @@ const fhirController: FhirController = {
       );
 
       const response = await request.json();
-      // console.log('FHIR RESPONSE!', response);
 
       const patientProfile: PatientProfile = {
         name: response.name[0].text,
@@ -67,12 +46,16 @@ const fhirController: FhirController = {
 
       res.locals.patientProfile = patientProfile;
     } catch (err) {
-      console.log(err);
+      return next({
+        log: 'Express error handler caught in getPatientProfile: ' + err,
+        status: 400,
+        message: { err: 'An error occurred' },
+      });
     }
-    next();
+    return next();
   },
   getPatientEOB: async (req, res, next) => {
-    const accessToken = res.locals.accessToken;
+    const accessToken: FlexpaAccessToken = res.locals.accessToken;
     try {
       const request = await fetch(
         'https://api.flexpa.com/fhir/ExplanationOfBenefit?patient=$PATIENT_ID',
@@ -87,7 +70,7 @@ const fhirController: FhirController = {
 
       const response = await request.json();
 
-      const patientEOB = response.entry.map(entry => {
+      const patientEOB = response.entry.map((entry: PatientEOBEntry) => {
         const obj = {
           insurer: entry.resource.insurer.display || 'N/A',
           provider: entry.resource.provider.display || 'N/A',
@@ -99,12 +82,15 @@ const fhirController: FhirController = {
         return obj;
       });
 
-      console.log('SERVER EOB!', patientEOB);
       res.locals.patientEOB = patientEOB;
     } catch (err) {
-      console.log(err);
+      return next({
+        log: 'Express error handler caught in getPatientEOB: ' + err,
+        status: 400,
+        message: { err: 'An error occurred' },
+      });
     }
-    next();
+    return next();
   },
 };
 

@@ -1,8 +1,4 @@
-import { useEffect, useState } from 'react';
-import { ProfileProps } from '@/types';
-
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { useLocation } from 'react-router-dom';
 
 function Profile(props) {
   const { profile } = props;
