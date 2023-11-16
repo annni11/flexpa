@@ -8,7 +8,7 @@ import Profile from './containers/Profile';
 import EOB from './containers/EOB';
 import Footer from './components/Footer';
 
-import { Patient, ExplanationOfBenefit } from 'fhir/r4';
+import { Patient } from 'fhir/r4';
 
 function App() {
   const [profile, setProfile] = useState({} as Patient);

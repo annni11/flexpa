@@ -35,3 +35,5 @@ app.use('/', (err: ServerError, req: Request, res: Response) => {
 app.listen(port, () => {
   console.log(`⚡️[server]: Server is running on http://localhost:${port}`);
 });
+
+export default app;

@@ -12,7 +12,7 @@
 
 - open 2 seperate terminals
 
-### Server Terminal:
+### Server Terminal
 
 ```bash
 # Navigate into the server directory
@@ -26,6 +26,7 @@ npm run build
 
 # Run the backend server
 npm run dev
+
 ```
 
 ### Client Terminal
@@ -40,3 +41,36 @@ npm install
 # Run the frontend server
 npm run dev
 ```
+
+### Testing
+
+```bash
+# Navigate into the server directory
+cd server
+
+# Run tests
+npm run test
+```
+
+# Notes:
+
+## Tech Stack
+
+- Typescript
+- Backend - Node.js, Express.js
+- Frontend - React w/ Vite
+- Styling/ UI - Tailwind CSS, Shadcn/ui
+- Testing - Jest, Supertest
+
+## MVP
+
+- Created a full stack Typescript application using Flexpa Link and Flexpa API
+- Created a component to display user profile and some information from patient
+  EOB
+- Set up Jest and Supertest on the back end for some basic testing
+
+## Stretch Goals
+
+- Full testing suite for front and back end
+- Enhanced styling to be more in line with Flexpa's branding
+- Display more pages/information from patient records

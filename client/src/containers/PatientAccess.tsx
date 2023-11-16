@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 
 interface FlexpaConfig {
   publishableKey: string;
-  onSuccess: (publicToken: string) => Promise | unknown;
+  onSuccess: (publicToken: string) => Promise<unknown>;
 }
 // Let Typescript know about the FlexpaLink object from the link script
 declare const FlexpaLink: {

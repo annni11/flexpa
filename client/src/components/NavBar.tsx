@@ -9,14 +9,14 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { Button } from '@/components/ui/button';
-import { LogOut, User, FileText, MenuIcon } from 'lucide-react';
+
+import { LogOut, User, FileText, MenuIcon, ChevronDown } from 'lucide-react';
 
 function NavBar() {
-  const [menuClicked, setMenuClicked] = useState(false);
+  const [menu, setMenu] = useState(<MenuIcon />);
   return (
     <nav
-      className='flex flex-row justify-between fixed top-0 left-0 w-screen py-4 px-10'
+      className='flex flex-row justify-between fixed top-0 left-0 w-screen py-4 px-10 z-50'
       style={{
         backgroundImage: 'url(https://os.flexpa.com/assets/Brand-pattern.png)',
       }}>
@@ -29,27 +29,37 @@ function NavBar() {
         />
       </div>
 
-      <div>
+      <div className='pt-2'>
         <DropdownMenu>
           <DropdownMenuTrigger>
-            <MenuIcon />
+            <div
+              onMouseEnter={() => setMenu(<ChevronDown />)}
+              onMouseLeave={() => setMenu(<MenuIcon />)}>
+              {menu}
+            </div>
           </DropdownMenuTrigger>
           <DropdownMenuContent className='mr-2'>
             <DropdownMenuLabel>My Account</DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
-              <User className='mr-2 h-4 w-4' />
-              <Link to='/profile'>Profile</Link>
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              <FileText className='mr-2 h-4 w-4' />
-              <Link to='/eob'>Explaination of Benefits</Link>
-            </DropdownMenuItem>
+            <Link to='/profile'>
+              <DropdownMenuItem>
+                <User className='mr-2 h-4 w-4' />
+                Profile
+              </DropdownMenuItem>
+            </Link>
+            <Link to='/eob'>
+              <DropdownMenuItem>
+                <FileText className='mr-2 h-4 w-4' />
+                Explaination of Benefits
+              </DropdownMenuItem>
+            </Link>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
-              <LogOut className='mr-2 h-4 w-4' />
-              <Link to='/'>Start Over</Link>
-            </DropdownMenuItem>
+            <Link to='/'>
+              <DropdownMenuItem>
+                <LogOut className='mr-2 h-4 w-4' />
+                Start Over
+              </DropdownMenuItem>
+            </Link>
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
