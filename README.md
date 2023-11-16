@@ -2,7 +2,7 @@
 
 # To begin:
 
-### Set API keys
+## Set API keys
 
 1. Rename the `.env.template` file as `.env` in both directories.
 
@@ -10,11 +10,11 @@
 
 3. Server env: input a PORT # - ex: 3000
 
-### Run Projects
+## Run Projects
 
 - open 2 seperate terminals
 
-# Server Terminal:
+### Server Terminal:
 
 ```bash
 # Navigate into the server directory
@@ -30,7 +30,7 @@ npm run build
 npm run dev
 ```
 
-# Client Terminal
+### Client Terminal
 
 ```bash
 # Navigate into the client directory
