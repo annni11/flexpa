@@ -8,8 +8,6 @@
 
 2. Open both `client/.env` and `server/.env` and add your test mode API keys.
 
-3. Server env: input a PORT # - ex: 3000
-
 ## Run Projects
 
 - open 2 seperate terminals
