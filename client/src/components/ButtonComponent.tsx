@@ -2,6 +2,8 @@ import { Button } from '@/components/ui/button';
 import { Loader2 } from 'lucide-react';
 import { useState } from 'react';
 
+declare const FlexpaLink: any;
+
 function ButtonComponent() {
   const [buttonClicked, setButtonClicked] = useState(false);
   const onClick: React.MouseEventHandler<HTMLButtonElement> = () => {
