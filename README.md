@@ -44,6 +44,9 @@ npm install
 
 # Run the frontend server
 npm run dev
+
+# To run build:
+npm run build
 ```
 
 ### Testing
