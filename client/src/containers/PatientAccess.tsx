@@ -1,6 +1,7 @@
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ButtonComponent from '../components/ButtonComponent';
-import { useState, useEffect } from 'react';
+import { PatientEOBEntry, PatientProfile } from '@/types';
 
 interface FlexpaConfig {
   publishableKey: string;
@@ -12,8 +13,13 @@ declare const FlexpaLink: {
   open: () => Record<string, unknown>;
 };
 
-function PatientAccess(props) {
-  const { profile, setProfile, eob, setEOB } = props;
+interface Props {
+  setProfile: (profile: PatientProfile) => void;
+  setEOB: (eob: PatientEOBEntry[]) => void;
+}
+
+function PatientAccess(props: Props) {
+  const { setProfile, setEOB } = props;
 
   const navigate = useNavigate();
   const apiKey = import.meta.env.VITE_REACT_FLEXPA_PUBLISHABLE_KEY;
@@ -21,7 +27,6 @@ function PatientAccess(props) {
 
   useEffect(() => {
     FlexpaLink.create({
-      // Replace with your publishable key
       publishableKey: apiKey,
       onSuccess: async publicToken => {
         // Send `publicToken` to your backend to exchange it for a patient `access_token`
@@ -40,8 +45,8 @@ function PatientAccess(props) {
           setProfile(data.profile);
           setEOB(data.eob);
           navigate('/profile');
-        } catch (err) {
-          console.log(err);
+        } catch (error) {
+          console.log('an error occurred');
         }
       },
     });

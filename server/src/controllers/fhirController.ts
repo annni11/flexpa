@@ -70,7 +70,6 @@ const fhirController: FhirController = {
       );
 
       const response = await request.json();
-      console.log('response', response.entry[0]);
 
       const patientEOB = response.entry.map((entry: PatientEOBEntry) => {
         const obj = {

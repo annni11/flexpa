@@ -1,10 +1,10 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { PatientProfile } from '@/types';
 
-function Profile(props) {
+function Profile(props: { profile: PatientProfile }) {
   const { profile } = props;
 
   const { name, gender, contact, birthDate, address } = profile;
-  console.log('THIS IS PROFILE~~~', profile);
 
   return (
     <div className='flex flex-col gap-5 py-28'>

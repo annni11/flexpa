@@ -17,18 +17,11 @@ function App() {
   return (
     <div className='flex flex-col '>
       <NavBar />
-
       <Footer />
       <Routes>
         <Route
           path='/'
-          element={
-            <PatientAccess
-              profile={profile}
-              setProfile={setProfile}
-              setEOB={setEOB}
-            />
-          }
+          element={<PatientAccess setProfile={setProfile} setEOB={setEOB} />}
         />
         <Route path='/profile' element={<Profile profile={profile} />} />
         <Route path='/eob' element={<EOB eob={eob} />} />

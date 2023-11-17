@@ -8,6 +8,10 @@
 
 2. Open both `client/.env` and `server/.env` and add your test mode API keys.
 
+3. In client env: input server url - ex: http://localhost:3000
+
+4. In server env: input the same port number - ex: 3000
+
 ## Run Projects
 
 - open 2 seperate terminals

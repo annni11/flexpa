@@ -11,7 +11,7 @@ type ServerError = {
   message: { err: string };
 };
 
-app.get('/', (req: Request, res: Response) => {
+app.get('/', (_req: Request, res: Response) => {
   res.send('Hello World!');
 });
 
@@ -23,7 +23,8 @@ app.use('/api', router);
 
 app.use(
   '/',
-  (err: ServerError, req: Request, res: Response, next: NextFunction) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  (err: ServerError, _req: Request, res: Response, _next: NextFunction) => {
     const defaultErr: ServerError = {
       log: 'Express error handler caught unknown middleware error',
       status: 500,
@@ -34,7 +35,8 @@ app.use(
   },
 );
 
-app.use((req: Request, res: Response, next: NextFunction) => {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+app.use((_req: Request, res: Response, _next: NextFunction) => {
   res.status(404).send("Sorry can't find that page!");
 });
 

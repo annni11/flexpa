@@ -26,8 +26,7 @@ const tokenController: TokenController = {
         }),
       });
 
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const { access_token: accessToken, expires_in: expiresIn } =
+      const { access_token: accessToken } =
         (await data.json()) as LinkExchangeResponse;
 
       res.locals.accessToken = accessToken;
@@ -55,8 +54,7 @@ const tokenController: TokenController = {
         }),
       });
 
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const { access_token: newAccessToken, expires_in: expiresIn } =
+      const { access_token: newAccessToken } =
         (await request.json()) as LinkExchangeResponse;
       res.locals.accessToken = newAccessToken;
     } catch (err) {
