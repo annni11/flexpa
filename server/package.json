@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest --verbose",
+    "test": "jest --verbose --detectOpenHandles",
     "build": "tsc",
-    "dev": "tsm --watch src/index.ts"
+    "dev": "tsm --watch src/server.ts"
   },
   "type": "module",
   "keywords": [],
