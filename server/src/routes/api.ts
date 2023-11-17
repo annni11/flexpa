@@ -13,6 +13,7 @@ router.post(
       profile: res.locals.patientProfile,
       eob: res.locals.patientEOB,
     };
+    console.log('eob', patientAll.eob);
     res.status(200).json(patientAll);
   },
 );

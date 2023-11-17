@@ -53,6 +53,8 @@ export interface PatientProfile {
 
 export interface PatientEOBEntry {
   resource: {
+    status: string;
+    use: string;
     insurer: { display: string };
     provider: { display: string };
     prescription: string;

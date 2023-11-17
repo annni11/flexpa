@@ -13,13 +13,24 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
+import { Separator } from '@/components/ui/separator';
 
-function EOB(props) {
+import { PatientEOBEntry } from '@/types';
+
+function EOB(props: { eob: PatientEOBEntry[] }) {
   const { eob } = props;
 
-  const eobRender = eob.map((entry, i: number) => {
-    const { insurer, provider, prescription, facility, createdDate, outcome } =
-      entry;
+  const eobRender = eob.map((entry: PatientEOBEntry, i: number) => {
+    const {
+      status,
+      use,
+      insurer,
+      provider,
+      prescription,
+      facility,
+      created,
+      outcome,
+    } = entry;
     return (
       <Accordion key={i} type='single' collapsible>
         <AccordionItem value='item-1'>
@@ -28,11 +39,14 @@ function EOB(props) {
             <Card>
               <CardHeader>
                 <CardTitle>{provider}</CardTitle>
-                <CardDescription>{insurer}</CardDescription>
+                <CardDescription>Insurer: {insurer}</CardDescription>
               </CardHeader>
-              <CardContent>
+              <Separator />
+              <CardContent className='pt-5'>
                 <ul>
-                  <li>Created Date: {createdDate}</li>
+                  <li>Status: {status}</li>
+                  <li>Use: {use}</li>
+                  <li>Created Date: {created}</li>
                   <li>Prescription: {prescription.display}</li>
                   <li>Facility: {facility.display}</li>
                 </ul>

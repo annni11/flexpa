@@ -21,12 +21,14 @@ function NavBar() {
         backgroundImage: 'url(https://os.flexpa.com/assets/Brand-pattern.png)',
       }}>
       <div>
-        <img
-          src='https://os.flexpa.com/assets/Brand-logo-full.png'
-          alt='logo'
-          width={150}
-          height={50}
-        />
+        <Link to='/'>
+          <img
+            src='https://os.flexpa.com/assets/Brand-logo-full.png'
+            alt='logo'
+            width={150}
+            height={50}
+          />
+        </Link>
       </div>
 
       <div className='pt-2'>

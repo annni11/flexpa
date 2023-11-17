@@ -65,9 +65,8 @@ npm run test
 ## MVP
 
 - Created a full stack Typescript application using Flexpa Link and Flexpa API
-- Created a component to display user profile and some information from patient
+- Created components to display user profile and some information from patient
   EOB
-- Set up Jest and Supertest on the back end for some basic testing
 
 ## Stretch Goals
 

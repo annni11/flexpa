@@ -8,11 +8,11 @@ import Profile from './containers/Profile';
 import EOB from './containers/EOB';
 import Footer from './components/Footer';
 
-import { Patient } from 'fhir/r4';
+import { PatientProfile, PatientEOBEntry } from './types';
 
 function App() {
-  const [profile, setProfile] = useState({} as Patient);
-  const [eob, setEOB] = useState([]);
+  const [profile, setProfile] = useState({} as PatientProfile);
+  const [eob, setEOB] = useState([] as PatientEOBEntry[]);
 
   return (
     <div className='flex flex-col '>
