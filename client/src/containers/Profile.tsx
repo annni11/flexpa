@@ -32,10 +32,17 @@ function Profile(props: { profile: PatientProfile }) {
           <CardTitle>Contact Info:</CardTitle>
         </CardHeader>
         <CardContent>
-          <ul>
-            <li>Phone: {contact.phone}</li>
-            <li>Email: {contact.email}</li>
-          </ul>
+          {contact ? (
+            <ul>
+              <li>Phone: {contact.phone}</li>
+              <li>Email: {contact.email}</li>{' '}
+            </ul>
+          ) : (
+            <ul>
+              <li>Phone: N/A</li>
+              <li>Email: N/A</li>
+            </ul>
+          )}
         </CardContent>
       </Card>
 
@@ -44,12 +51,18 @@ function Profile(props: { profile: PatientProfile }) {
           <CardTitle>Address:</CardTitle>
         </CardHeader>
         <CardContent>
-          <ul>
-            <li>{address.line}</li>
-            <li>{address.city}</li>
-            <li>{address.state}</li>
-            <li>{address.postalCode}</li>
-          </ul>
+          {address ? (
+            <ul>
+              <li>{address.line}</li>
+              <li>{address.city}</li>
+              <li>{address.state}</li>
+              <li>{address.postalCode}</li>
+            </ul>
+          ) : (
+            <ul>
+              <li>Address: N/A</li>
+            </ul>
+          )}
         </CardContent>
       </Card>
     </div>

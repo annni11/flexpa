@@ -17,7 +17,7 @@ function App() {
   return (
     <div className='flex flex-col '>
       <NavBar />
-      <Footer />
+
       <Routes>
         <Route
           path='/'
@@ -26,6 +26,7 @@ function App() {
         <Route path='/profile' element={<Profile profile={profile} />} />
         <Route path='/eob' element={<EOB eob={eob} />} />
       </Routes>
+      <Footer />
     </div>
   );
 }
