@@ -2,7 +2,7 @@
 
 # To begin:
 
-## Set API keys
+## Update .env.template files in client and server
 
 1. Rename the `.env.template` file as `.env` in both directories.
 
@@ -76,4 +76,4 @@ npm run test
 
 - Full testing suite for front and back end
 - Enhanced styling to be more in line with Flexpa's branding
-- Display more pages/information from patient records
+- Parce through more pages/information from patient records
